@@ -73,8 +73,9 @@ const BookmarksCollectionCard = (props) => {
         <Card className={classes.card}>
         <CardHeader
             avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
+            <Avatar aria-label="author" className={classes.avatar}>
                 {author[0]}
+                {/* 應該要放 author 的大頭照 */}
             </Avatar>
             }
             // action={
