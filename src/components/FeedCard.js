@@ -25,7 +25,7 @@ import  BookmarksList from './BookmarksList';
 
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: 600,
+        maxWidth: '1',
     },
     media: {
         height: 0,
