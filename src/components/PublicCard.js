@@ -19,6 +19,7 @@ import Bookmark from './BookmarksAdd';
 import CommentCard from './CommentCard';
 
 
+
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
@@ -133,9 +134,11 @@ export default function PublicCard(props) {
                     <Typography vvariant='body1' color='textPrimary' paragraph>
                         <div className={classes.div3}>
                             <div className={classes.div3}> {publishedTime} </div>
-                            <Button variant='outlined' size='medium' className={classes.button} onClick={event => { console.log(this); }}>
-                                Archive
-                            </Button>
+                            <Tooltip title={`Make \'${title}\' go private`}>
+                                <Button variant='outlined' size='medium' className={classes.button} onClick={event => console.log('Go private')}>
+                                    Archive
+                                </Button>
+                            </Tooltip>
                         </div>
                     </Typography>
                     <Typography variant='body2' color='textSecondary'> Description </Typography>

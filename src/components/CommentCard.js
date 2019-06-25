@@ -11,7 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import { red } from '@material-ui/core/colors';
 import DoneIcon from '@material-ui/icons/Done';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+
+import CommentReply from './CommentReply';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -38,11 +40,7 @@ export default function CommentCard(props) {
           <Avatar aria-label="Author Icon" src={author.avatar} className={classes.avatar} />
         }
         action={
-          <Tooltip title={`Inbox ${author.name}`}>
-            <IconButton aria-label="Reply comments" onClick={event => console.log('Reply!!')}>
-              <MoreVertIcon />
-            </IconButton>
-          </Tooltip>
+          <CommentReply comment={props.comment} />
         }
         title={author.name}
       />
