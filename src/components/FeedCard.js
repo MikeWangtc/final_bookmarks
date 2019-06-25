@@ -10,6 +10,7 @@ import Collapse from '@material-ui/core/Collapse';
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { blueGrey } from '@material-ui/core/colors';
 import { Button, CardActionArea } from '@material-ui/core';
@@ -21,7 +22,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import  BookmarksList from './BookmarksList';
+import BookmarksList from './BookmarksList';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -48,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
         color: blueGrey[500],
-        borderColor: blueGrey[500]
+        borderColor: blueGrey[500],
     },
     typography: {
         color: blueGrey[500],
@@ -62,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 const BookmarksCollectionCard = (props) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
-    const { author, title, description, bookmarks, tags, likes } = props.card;
+    const { author, title, description, bookmarks, tags, likes, publishedTime } = props.collection;
     // const {onClick} = props.function
 
     function handleExpandClick() {
@@ -73,10 +74,7 @@ const BookmarksCollectionCard = (props) => {
         <Card className={classes.card}>
         <CardHeader
             avatar={
-            <Avatar aria-label="author" className={classes.avatar}>
-                {author[0]}
-                {/* 應該要放 author 的大頭照 */}
-            </Avatar>
+            <Avatar aria-label="author" className={classes.avatar} src={author.avatar} />
             }
             // action={
             // <IconButton aria-label="Settings">
@@ -84,11 +82,12 @@ const BookmarksCollectionCard = (props) => {
             // </IconButton>
             // }
             title={title}
-            subheader={author}
+            subheader={`Published by ${author.name}. At ${publishedTime}.`}
         />
             <Divider variant="inset" />
         <CardContent>
-            <Typography variant='body2' color='textSecondary'> {description} </Typography>
+            <Typography variant='body2' color='textSecondary'> Description </Typography>
+            <Typography variant='body1' color='textPrimary'> {description} </Typography>
         </CardContent>
 
         <CardActions disableSpacing>
@@ -107,12 +106,15 @@ const BookmarksCollectionCard = (props) => {
             aria-expanded={expanded}
             aria-label="Show more"
             >
-            <ExpandMoreIcon />
+            <Tooltip title='Expand to see bookmarks'>
+                <ExpandMoreIcon />
+            </Tooltip>       
             </IconButton>
         </CardActions>
         <Divider variant='middle'/>
         <CardContent>
-            Tags: 
+            <Typography variant='body2' color='textSecondary'>
+                Tags
                 {tags.map(tag => 
                     <Chip
                     size="small"
@@ -121,6 +123,7 @@ const BookmarksCollectionCard = (props) => {
                     className={classes.chip}
                     />
                 )}
+            </Typography>
         </CardContent>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent> <BookmarksList bookmarks={bookmarks} /> </CardContent>
